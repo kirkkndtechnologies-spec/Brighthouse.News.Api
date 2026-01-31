@@ -1,5 +1,4 @@
 ﻿using Brighthouse.News.Api.Application.Dto;
-using Brighthouse.News.Api.Features.ArticleDisplay;
 using Brighthouse.News.Api.Models;
 using Microsoft.AspNetCore.Http.HttpResults;
 using Microsoft.AspNetCore.Mvc;
@@ -19,22 +18,24 @@ namespace Brighthouse.News.Api.Features.ArticleManage
                 .Accepts<ArticleAddDto>("application/json")
                 .WithName("AddArticle")
                 .WithTags("Brighthouse Article Management")
-                .WithDescription("Add a new article");
+                .WithDescription("Add a new article")
+                .RequireAuthorization();
 
             root.MapPut(pattern: "article", handler: UpdateArticleAsync)
                 .Produces(StatusCodes.Status500InternalServerError)
                 .Accepts<ArticleUpdateDto>("application/json")
                 .WithName("UpdateArticle")
                 .WithTags("Brighthouse Article Management")
-                .WithDescription("Update an existing article");
+                .WithDescription("Update an existing article")
+                .RequireAuthorization();
 
             root.MapDelete(pattern: "article", handler: DeleteArticleAsync)
                 .Produces(StatusCodes.Status500InternalServerError)
                 .Accepts<ArticleUpdateDto>("application/json")
                 .WithName("DeleteArticle")
                 .WithTags("Brighthouse Article Management")
-                .WithDescription("Delete an existing article");
-
+                .WithDescription("Delete an existing article")
+                .RequireAuthorization();
         }
 
         public static async Task<Results<Ok<BrighthouseResponse>, BadRequest<BrighthouseResponse>, InternalServerError>> AddArticleAsync(
