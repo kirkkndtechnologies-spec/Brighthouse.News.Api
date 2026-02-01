@@ -110,6 +110,6 @@ app.RegisterArticleManageEndpoints();
 app.UseRouting();
 app.UseHttpsRedirection();
 app.UseAuthorization();
-app.UseCors(options => options.AllowAnyHeader().AllowAnyMethod().AllowAnyOrigin());
+app.UseCors();
 
 app.Run();

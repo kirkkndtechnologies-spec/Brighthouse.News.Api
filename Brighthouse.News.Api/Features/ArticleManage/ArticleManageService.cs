@@ -80,11 +80,10 @@ namespace Brighthouse.News.Api.Features.ArticleManage
                 if (validationResult.IsValid)
                 {
                     var article = new Article();
-                    article = input.Adapt<Article>();
 
                     var existingArticle = await _newsRepository.GetArticleAsync(input.Id);
 
-                    if (article == null)
+                    if (existingArticle == null)
                     {
                         validationResult.Errors.Add(new ValidationFailure(nameof(input.Id), "Article does not exist"));
 
@@ -94,7 +93,12 @@ namespace Brighthouse.News.Api.Features.ArticleManage
                     }
                     else
                     {
-                        await _newsRepository.DeleteArticleAsync(input.Id);
+                        existingArticle.AuthorId = input.AuthorId;
+                        existingArticle.Title = input.Title;
+                        existingArticle.Summary = input.Summary;
+                        existingArticle.Content = input.Content;
+
+                        await _newsRepository.UpdateArticleAsync(existingArticle);
 
                         response.Success = true;
                         response.Message = "The article has been successfully updated";
