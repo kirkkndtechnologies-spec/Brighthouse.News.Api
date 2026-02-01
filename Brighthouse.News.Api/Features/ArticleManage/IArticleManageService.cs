@@ -10,7 +10,7 @@ namespace Brighthouse.News.Api.Features.ArticleManage
 
         public Task<BrighthouseResponse> UpdateArticleAsync(ArticleUpdateDto input);
 
-        public Task<BrighthouseResponse> DeleteArticleAsync(ArticleDeleteDto input);
+        public Task<BrighthouseResponse> DeleteArticleAsync(ArticleDetailInputDto input);
 
     }
 }

@@ -3,7 +3,7 @@ using FluentValidation;
 
 namespace Brighthouse.News.Api.Features.ArticleManage
 {
-    public class ArticleDeleteValidator : AbstractValidator<ArticleDeleteDto>
+    public class ArticleDeleteValidator : AbstractValidator<ArticleDetailInputDto>
     {
         public ArticleDeleteValidator()
         {

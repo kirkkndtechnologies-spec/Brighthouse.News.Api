@@ -11,7 +11,7 @@ namespace Brighthouse.News.Api.Features.ArticleManage
         public static void RegisterArticleManageEndpoints(this IEndpointRouteBuilder endpointRouteBuilder)
         {
             var root = endpointRouteBuilder
-                .MapGroup(string.Empty);
+                .MapGroup("");
 
             root.MapPost(pattern: "article", handler: AddArticleAsync)
                 .Produces(StatusCodes.Status500InternalServerError)
@@ -31,7 +31,7 @@ namespace Brighthouse.News.Api.Features.ArticleManage
 
             root.MapDelete(pattern: "article", handler: DeleteArticleAsync)
                 .Produces(StatusCodes.Status500InternalServerError)
-                .Accepts<ArticleUpdateDto>("application/json")
+                .Accepts<ArticleDetailInputDto>("application/json")
                 .WithName("DeleteArticle")
                 .WithTags("Brighthouse Article Management")
                 .WithDescription("Delete an existing article")
@@ -83,7 +83,7 @@ namespace Brighthouse.News.Api.Features.ArticleManage
         }
 
         public static async Task<Results<Ok<BrighthouseResponse>, BadRequest<BrighthouseResponse>, InternalServerError>> DeleteArticleAsync(
-              ILogger<ArticleManageService> logger, [FromBody] ArticleDeleteDto input, IArticleManageService articleDisplayService)
+              ILogger<ArticleManageService> logger, [FromBody] ArticleDetailInputDto input, IArticleManageService articleDisplayService)
         {
             var response = await articleDisplayService.DeleteArticleAsync(input);
 
