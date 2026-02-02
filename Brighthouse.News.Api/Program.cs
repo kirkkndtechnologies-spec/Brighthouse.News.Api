@@ -1,5 +1,6 @@
 using Brighthouse.News.Api.Features.ArticleDisplay;
 using Brighthouse.News.Api.Features.ArticleManage;
+using Brighthouse.News.Api.Features.Lookups;
 using Brighthouse.News.Api.Infrastructure.Contexts;
 using Brighthouse.News.Api.Infrastructure.Migrations;
 using Brighthouse.News.Api.Infrastructure.Repositories;
@@ -80,6 +81,7 @@ builder.Services.AddCors(options =>
 });
 
 builder.Services.AddScoped<INewsRepository, NewsRepository>();
+builder.Services.AddScoped<ILookupService, LookupService>();
 builder.Services.AddScoped<IArticleDisplayService, ArticleDisplayService>();
 builder.Services.AddScoped<IArticleManageService, ArticleManageService>();
 
@@ -103,9 +105,10 @@ if (app.Environment.IsDevelopment())
 }
 
 // Register the minimal api endpoints
-app.MapIdentityApi<IdentityUser>();
+app.RegisterLookupEndpoints();
 app.RegisterArticleDisplayEndpoints();
 app.RegisterArticleManageEndpoints();
+app.MapIdentityApi<IdentityUser>();
 
 app.UseRouting();
 app.UseHttpsRedirection();

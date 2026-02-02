@@ -61,5 +61,9 @@ namespace Brighthouse.News.Api.Infrastructure.Repositories
             }
         }
 
+        public async Task<List<Author>> GetAuthorsAsync()
+        {
+            return await _dbContext.Authors.ToListAsync();
+        }
     }
 }

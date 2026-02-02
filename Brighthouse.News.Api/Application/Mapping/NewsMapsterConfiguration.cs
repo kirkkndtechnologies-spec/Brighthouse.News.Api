@@ -14,6 +14,11 @@ namespace Brighthouse.News.Api.Application.Mapping
                     .Map(dest => dest.Summary, src => src.Summary)
                     .Map(dest => dest.Author, src => $"{src.Author.FirstName} {src.Author.LastName}")
                     .Map(dest => dest.PublishDate, src => src.PublishDate);
+
+            config.NewConfig<Author, AuthorLookupDto>()
+                    .Map(dest => dest.Id, src => src.Id)
+                    .Map(dest => dest.Name, src => $"{src.FirstName} {src.LastName}");
+
         }
     }
 }

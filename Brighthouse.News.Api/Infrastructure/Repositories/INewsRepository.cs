@@ -17,5 +17,7 @@ namespace Brighthouse.News.Api.Infrastructure.Repositories
 
         public Task DeleteArticleAsync(int articleId);
 
+        public Task<List<Author>> GetAuthorsAsync();
+
     }
 }
