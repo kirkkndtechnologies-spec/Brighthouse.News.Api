@@ -25,12 +25,16 @@ namespace Brighthouse.News.Api.Features.ArticleManage
 
             try
             {
+                _logger.LogInformation($"Start the valiation before attempting to add the article");
+
                 var validationResult = await _addValidator.ValidateAsync(input);
 
                 if (validationResult.IsValid)
                 {
                     var article = new Article();
                     article = input.Adapt<Article>();
+
+                    _logger.LogInformation($"Check for a duplicate article for the same author");
 
                     var duplicateArticle = await _newsRepository.GetArticleByTitleAndAuthorAsync(input.AuthorId, input.Title);
 
@@ -44,6 +48,8 @@ namespace Brighthouse.News.Api.Features.ArticleManage
                     }
                     else
                     {
+                        _logger.LogInformation($"Validation has passed so add the article");
+
                         var articleId = await _newsRepository.AddArticleAsync(article);
 
                         response.Success = true;
@@ -62,7 +68,7 @@ namespace Brighthouse.News.Api.Features.ArticleManage
             {
                 response.Success = false;
                 response.Message = "The articles could not be added because of an internal server error";
-                _logger.LogInformation(ex, "The articles could not be added because of an internal server error");
+                _logger.LogError(ex, "The articles could not be added because of an internal server error");
             }
 
             return response;
@@ -74,6 +80,8 @@ namespace Brighthouse.News.Api.Features.ArticleManage
 
             try
             {
+                _logger.LogInformation($"Start the valiation before attempting to updating the article");
+
                 var validationResult = await _updateValidator.ValidateAsync(input);
 
                 if (validationResult.IsValid)
@@ -114,7 +122,7 @@ namespace Brighthouse.News.Api.Features.ArticleManage
             {
                 response.Success = false;
                 response.Message = "The articles could not be updated because of an internal server error";
-                _logger.LogInformation(ex, "The articles could not be updated because of an internal server error");
+                _logger.LogError(ex, "The articles could not be updated because of an internal server error");
             }
 
             return response;
@@ -126,6 +134,8 @@ namespace Brighthouse.News.Api.Features.ArticleManage
 
             try
             {
+                _logger.LogInformation($"Start the valiation before attempting to delete the article");
+
                 var validationResult = await _deleteValidator.ValidateAsync(input);
 
                 if (validationResult.IsValid)
@@ -159,7 +169,7 @@ namespace Brighthouse.News.Api.Features.ArticleManage
             {
                 response.Success = false;
                 response.Message = "The articles could not be deleted because of an internal server error";
-                _logger.LogInformation(ex, "The articles could not be deleted because of an internal server error");
+                _logger.LogError(ex, "The articles could not be deleted because of an internal server error");
             }
 
             return response;
