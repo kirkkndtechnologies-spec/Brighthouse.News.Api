@@ -2,6 +2,9 @@
 
 namespace Brighthouse.News.Api.Domain
 {
+    /// <summary>
+    /// Data for the article.
+    /// </summary>
     public class Article
     {
 
