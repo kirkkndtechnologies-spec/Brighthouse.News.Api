@@ -39,11 +39,10 @@ namespace Brighthouse.News.Api.Infrastructure.Repositories
 
             if (articleToUpdate != null)
             {
-                articleToUpdate.AuthorId = article.Id;
+                articleToUpdate.AuthorId = article.AuthorId;
                 articleToUpdate.Title = article.Title;
                 articleToUpdate.Summary = article.Summary;
                 articleToUpdate.Content = article.Content;
-                articleToUpdate.PublishDate = article.PublishDate;
 
                 await _dbContext.SaveChangesAsync();
             }

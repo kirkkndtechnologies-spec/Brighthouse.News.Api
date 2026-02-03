@@ -33,6 +33,7 @@ namespace Brighthouse.News.Api.Features.ArticleDisplay
                         response.Success = false;
                         response.Message = "The article could not be retrieved because of validation errors";
                         response.ValidationResult = validationResult;
+                        response.Data = null;
                     }
                     else
                     {

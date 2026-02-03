@@ -1,6 +1,5 @@
 ﻿using Brighthouse.News.Api.Application.Dto;
 using Brighthouse.News.Api.Domain;
-using Brighthouse.News.Api.Features.ArticleDisplay;
 using Brighthouse.News.Api.Infrastructure.Repositories;
 using Brighthouse.News.Api.Models;
 using FluentValidation;
@@ -9,12 +8,12 @@ using Mapster;
 
 namespace Brighthouse.News.Api.Features.ArticleManage
 {
-    public class ArticleManageService(ILogger<ArticleDisplayService> logger,
+    public class ArticleManageService(ILogger<ArticleManageService> logger,
         INewsRepository newsRepository, IValidator<ArticleAddDto> addValidator,
         IValidator<ArticleUpdateDto> updateValidator, IValidator<ArticleDetailInputDto> deleteValidator) : IArticleManageService
     {
 
-        private readonly ILogger<ArticleDisplayService> _logger = logger;
+        private readonly ILogger<ArticleManageService> _logger = logger;
         private readonly INewsRepository _newsRepository = newsRepository;
         private readonly IValidator<ArticleAddDto> _addValidator = addValidator;
         private readonly IValidator<ArticleUpdateDto> _updateValidator = updateValidator;
