@@ -1,0 +1,33 @@
+name: Build api for each PR
+
+on:
+  pull_request:
+    branches:
+      - main
+      - develop
+    types:
+      - opened
+      - synchronize
+      - reopened
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v4
+
+    - name: Setup .NET SDK
+      uses: actions/setup-dotnet@v4
+      with:
+        dotnet-version: '10.0.2' 
+
+    - name: Restore dependencies
+      run: dotnet restore src/Brighthouse.News.Api/Brighthouse.News.Api.csproj
+
+    - name: Build the API project
+      run: dotnet build src/Brighthouse.News.Api/Brighthouse.News.Api.csproj --no-restore
+
+    - name: Run tests (optional)
+      run: dotnet test src/Brighthouse.News.Test/Brighthouse.News.Test.csproj --no-build
