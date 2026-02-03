@@ -16,3 +16,5 @@ https://localhost:7121/swagger/index.html
 ## Unit tests
 A small set of unit tests has been added
 
+## Github action
+A new workflow has been added which will kick off when a PR gets created.
